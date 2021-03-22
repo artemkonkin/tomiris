@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "HASH";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>HASH Generator</h1>
+
+            @using (Html.BeginForm("Index", "Hash", FormMethod.Post))
+            {
+                <p>
+                    <label>Text</label><br />
+                    <input type="text" placeholder=@ViewData["data"] name="data" />
+                </p>
+                <p>
+                    <input type="submit" value="Отправить" />
+                </p>
+            }
+
+            <p>
+                <label for="">String: </label>
+                @ViewData["data"]
+            </p>
+
+            <p>
+                <label for="">HASH: </label>
+                @ViewData["hashString"]
+            </p>
+
+        </div>
+    </div>
+</div>
