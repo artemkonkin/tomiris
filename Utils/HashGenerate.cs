@@ -39,7 +39,7 @@ namespace tomiris.utils
                 byte[] bytes = sha256Hash.ComputeHash(encoding.GetBytes(inputData));
                 for (int i = 0; i < bytes.Length; i++)
                 {
-                    builder.Append(bytes[i].ToString("X2")); //беру первые два байта и добавляю в конец строки
+                    builder.Append(bytes[i].ToString("X2"));
                 }
             }
             return builder.ToString();
