@@ -1,7 +1,5 @@
-using System;
-using System.Security.Cryptography;
-using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using tomiris.utils;
 
 namespace tomiris.Controllers
 {
@@ -16,34 +14,11 @@ namespace tomiris.Controllers
         [HttpPost]
         public IActionResult Index(string data)
         {
-            string hashString = GetHashData(data);
+            HashGenerate hashStringGenerator = new();
+            string hashString = hashStringGenerator.Compute(data);
             ViewData["data"] = data;
             ViewData["hashString"] = hashString;
             return View();
-        }
-
-        static string GetHashData(string data)
-        {
-            ASCIIEncoding encoding = new();
-
-            if (String.IsNullOrWhiteSpace(data))
-            {
-                return "Введите значение";
-            }
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                byte[] bytes = sha256Hash.ComputeHash(encoding.GetBytes(data));
-
-                StringBuilder builder = new();
-
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-
-                return builder.ToString();
-            }
-
         }
     }
 }
