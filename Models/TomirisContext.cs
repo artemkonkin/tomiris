@@ -4,7 +4,7 @@ namespace tomiris.Models
 {
     public class TomirisContext : DbContext
     {
-        public DbSet<UserModel> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public TomirisContext(DbContextOptions<TomirisContext> options)
             : base(options)
