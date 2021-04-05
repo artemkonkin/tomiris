@@ -2,7 +2,37 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+
+<div class="grid grid-cols-4 gap-4">
+
+    <div class="inline-flex flex-col space-y-4 items-start justify-start col-span-1 p-4 bg-white border border-gray-300">
+        <p class="w-full text-lg font-semibold text-gray-900">Dictionary<TKey,TValue> Класс</p>
+        <p class="w-full text-sm text-gray-900">В следующем примере кода создается пустая Dictionary<TKey,TValue> строка
+                со строковыми ключами и используется Add метод для добавления некоторых элементов.</p>
+        <div class="inline-flex space-x-1 items-center justify-start w-full">
+            <div class="flex space-x-1 items-center justify-start h-full">
+                <p class="text-xs text-gray-400">Дата:</p>
+                <p class="text-xs text-gray-400">15.08.2021</p>
+            </div>
+            <div class="flex space-x-1 items-center justify-center flex-1 h-full">
+                <p class="text-xs text-right text-gray-400">Время:</p>
+                <p class="text-xs text-gray-400">15:00</p>
+            </div>
+            <div class="flex space-x-4 items-start justify-start h-full">
+                <a asp-area="" asp-controller="BlogPost" asp-action="Edit">
+                    <img src="~/img/icons/edit.svg" style="w-4 h-full bg-gray-300" alt="">
+                </a>
+                <a asp-area="" asp-controller="BlogPost" asp-action="Delete">
+                    <img src="~/img/icons/delete.svg" style="w-4 h-full bg-gray-300" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="inline-flex flex-col space-y-4 items-center justify-center col-span-1 p-4 bg-white border border-gray-300">
+            <a asp-area="" asp-controller="BlogPost" asp-action="Create" class="inline-flex items-center justify-center">Создать заметку +</a>
+    </div>
+    
 </div>

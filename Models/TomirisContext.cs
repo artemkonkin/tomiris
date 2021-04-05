@@ -9,7 +9,7 @@ namespace tomiris.Models
         public TomirisContext(DbContextOptions<TomirisContext> options)
             : base(options)
         {
-            Database.EnsureDeleted(); //clear before create
+            //Database.EnsureDeleted(); //clear before create
             Database.EnsureCreated();
         }
     }

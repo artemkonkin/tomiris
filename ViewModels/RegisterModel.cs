@@ -1,5 +1,7 @@
+using System;
 using System.ComponentModel.DataAnnotations;
- 
+using tomiris.utils;
+
 namespace tomiris.ViewModels
 {
     public class RegisterModel

@@ -3,10 +3,13 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using tomiris.ViewModels; // пространство имен моделей RegisterModel и LoginModel
-using tomiris.Models; // пространство имен TomirisContext и класса User
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Diagnostics;
+
+using tomiris.ViewModels;
+using tomiris.Models;
+using tomiris.utils;
 
 namespace tomiris.Controllers
 {
@@ -24,13 +27,17 @@ namespace tomiris.Controllers
             return View();
         }
 
+        //TODO Сделать проверку хеша введнного пароля пользователя
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
         {
             if (ModelState.IsValid)
             {
-                User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
+                // Ищу пользователя в БД и сверяю хеши паролей
+                User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == GeneratePasswordHash(model.Password));
+                
                 if (user != null)
                 {
                     await Authenticate(model.Email); // аутентификация
@@ -48,6 +55,8 @@ namespace tomiris.Controllers
             return View();
         }
 
+        //TODO Сделать сохранение хеша введнного пароля пользователя
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel model)
@@ -57,8 +66,8 @@ namespace tomiris.Controllers
                 User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                 if (user == null)
                 {
-                    // добавляем пользователя в бд
-                    db.Users.Add(new User { Email = model.Email, Password = model.Password });
+                    // добавляем пользователя в бд + хеш пароля
+                    db.Users.Add(new User { Email = model.Email, Password = GeneratePasswordHash(model.Password) });
                     await db.SaveChangesAsync();
 
                     await Authenticate(model.Email); // аутентификация
@@ -71,6 +80,16 @@ namespace tomiris.Controllers
             return View(model);
         }
 
+        // Генерирую хеш
+
+        private static string GeneratePasswordHash(string data)
+        {
+            HashGenerate hashStringGenerator = new();
+            return hashStringGenerator.Compute(data);
+        }
+
+        // Даю доступы
+
         private async Task Authenticate(string userName)
         {
             // создаем один claim
@@ -82,8 +101,12 @@ namespace tomiris.Controllers
             ClaimsIdentity id = new(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+
+            Debug.WriteLine($"Аутентифицирован успешно. {userName}");
         }
 
+        // Выход
+        
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

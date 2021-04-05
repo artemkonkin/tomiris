@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,13 +7,15 @@ namespace tomiris.Controllers
 {
     public class TestController : Controller
     {
+        [Authorize]
         public IActionResult Index()
         {
             TestFunctions tFun = new();
             tFun.TcDictionary();
             return View();
         }
-
+        
+        [Authorize]
         public IActionResult Welcome(string name, int numTimes = 1)
         {
             ViewData["Message"] = "Hello " + name;
