@@ -36,7 +36,7 @@ namespace tomiris.Controllers
         public int TcDictionary()
         {
             DgMessage("Test Class Dictionary");
-            Dictionary<string, string> dicSet = new Dictionary<string, string>();
+            Dictionary<string, string> dicSet = new();
             dicSet.Add("Namba","Altynay Abdieva");
             dicSet.Add("Ooba","Artem Konkin");
             dicSet.Add("Krista","Begimay Abdieva");

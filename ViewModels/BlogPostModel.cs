@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace tomiris.ViewModels
 {
-    public class BlogPostModel
+    public class BlogPostViewModel
     {
         [Required(ErrorMessage="Пустое имя статьи.")]
         public string Name {get; set;}

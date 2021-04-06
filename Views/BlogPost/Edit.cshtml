@@ -1,23 +1,26 @@
-<div class="container">
-  <div class="inline-flex space-x-32 items-center justify-between py-0.5 bg-white" style="width: 100%; height: 30px;">
-    <p class="text-xl font-semibold text-gray-900">Редактировать заметку</p>
-    <div class="inline-flex space-x-4 items-center justify-end">
-      <a asp-area="" asp-controller="Home" asp-action="Index" class="inline-flex text-sm items-center">Отмена
-          <img src="~/img/icons/close.svg" alt="" style="padding: 8px;">
-      </a>
-      <a href="" class="inline-flex text-sm items-center text-blue-700">Сохранить
-          <img src="~/img/icons/save.svg" alt="" style="padding: 8px;">
-      </a>
-    </div>
-  </div>
+@{
+    ViewData["Title"] = "Edit";
+}
 
-  <div class="input" style="width: 100%;">
-    <label>Название заметки</label><br />
-    <input type="text" placeholder="Название" name="data" />
-  </div>
-  <br />
-  <div class="input" style="width: 100%;">
-    <label>Текст заметки</label><br />
-    <textarea name="w3review" rows="4" cols="50" style="height: 50vh;"></textarea>
-  </div>
-</div>
+@model tomiris.Models.BlogPostModel
+ 
+<form asp-action="Edit" asp-controller="BlogPost">
+    <label asp-for="Id"></label>
+    <div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" asp-for="Id" />
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" asp-for="Name" />
+        </div>
+        <div class="form-group">
+            <label>Text</label>
+            <input asp-for="Text" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Edit" class="btn btn-outline-dark"/>
+        </div>
+    </div>
+</form>
