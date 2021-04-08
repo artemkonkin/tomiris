@@ -31,7 +31,8 @@ namespace tomiris.Controllers
             }
         }
 
-        //READ
+        // 
+        // GET: Index
 
         [HttpGet]
         [Authorize]
