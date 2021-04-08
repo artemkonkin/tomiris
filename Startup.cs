@@ -30,7 +30,7 @@ namespace tomiris
             services.AddControllersWithViews();
 
             services.AddDbContext<TomirisContext>(
-                dbContextOptions => dbContextOptions.UseMySql("server=localhost;user=root;password=0000;database=tomiris",
+                dbContextOptions => dbContextOptions.UseMySql("server=localhost;user=root;password=000;database=tomiris",
                 new MySqlServerVersion(new Version(8, 0, 22))
             ));
 
