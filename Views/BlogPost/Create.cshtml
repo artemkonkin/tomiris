@@ -1,34 +1,35 @@
+@model tomiris.Models.BlogPostModel
+
 @{
-  ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create";
 }
 
-<div class="container">
-  @using (Html.BeginForm("BlogPost", "Create", FormMethod.Post))
-  {
-    <div class="inline-flex space-x-32 items-center justify-between py-0.5 bg-white" style="width: 100%; height: 30px;">
-      <p class="text-xl font-semibold text-gray-900">Создать заметку</p>
-      <div class="inline-flex space-x-4 items-center justify-end">
-        <a asp-area="" asp-controller="Home" asp-action="Index" class="inline-flex text-sm items-center">Отмена
-          <img src="~/img/icons/close.svg" alt="" style="padding: 8px;">
-        </a>
-        <a href="" type="submit" class="inline-flex text-sm items-center text-blue-700">Сохранить
-          <img src="~/img/icons/save.svg" alt="" style="padding: 8px;">
-        </a>
-      </div>
-    </div>
+<h1>Create</h1>
 
-    <div class="input" style="width: 100%;">
-      <label>Название заметки</label><br />
-      <input type="text" placeholder="Название" name="name" />
+<h4>BlogPostModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <br />
-    <div class="input" style="width: 100%;">
-      <label>Текст заметки</label><br />
-      <textarea name="text" rows="4" cols="50" style="height: 50vh;"></textarea>
-    </div>
-  }
 </div>
 
-@{
-  //TODO форма для создания заметки
-}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

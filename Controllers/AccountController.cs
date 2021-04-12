@@ -37,10 +37,12 @@ namespace tomiris.Controllers
             {
                 // Ищу пользователя в БД и сверяю хеши паролей
                 User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == GeneratePasswordHash(model.Password));
-                
+
                 if (user != null)
                 {
-                    await Authenticate(model.Email); // аутентификация
+                    await Authenticate(model.Email);
+                    tomiris.Startup.applicationData["userId"] = user.Id.ToString();
+                    tomiris.Startup.applicationData["userName"] = model.Email;
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -106,10 +108,12 @@ namespace tomiris.Controllers
         }
 
         // Выход
-        
+
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            tomiris.Startup.applicationData["userId"] = "null";
+            tomiris.Startup.applicationData["userName"] = "null";
             return RedirectToAction("Login", "Account");
         }
     }

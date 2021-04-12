@@ -1,0 +1,27 @@
+@model tomiris.Models.BlogPostModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="flex grid grid-cols-4 gap-4 items-center align-center justify-center" style="display: flex; height: 75vh; vidth: 100%">
+
+    <div class="inline-flex flex-col space-y-5 items-center justify-center align-center">
+        <img src="~/img/delete_il.svg" alt="" style="width: 300px; height: auto;">
+        <p class="text-2xl font-bold text-center text-gray-900">Удалить выбранный элемент?</p>
+        <p class="text-base text-center text-gray-900" style="width: 391px;">После удаления вы не сможете восстановить
+            данную текстовую заметку.</p>
+        <div class="inline-flex space-x-5 items-start justify-start" style="width: 391px; height: 41px;">
+            <form asp-action="Delete" style="display: contents;">
+                <input type="hidden" asp-for="Id" />
+                <button asp-action="Index" class="flex items-center justify-center flex-1 p-3 bg-gray-200">
+                    <p class="text-sm text-center text-gray-500">Не удалять</p>
+                </button>
+                <button type="submit" class="flex items-center justify-center flex-1 p-3 bg-blue-600"
+                    style="margin-left: 16px;">
+                    <p class="text-sm text-center text-white">Удалить</p>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,79 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<tomiris.Models.BlogPostModel>
 
 @{
-    //TODO отображение всех доступных заметок на странице
+    ViewData["Title"] = "Мои заметки";
+    string text = "";
 }
+
+<div class="inline-flex items-center justify-start bg-white w-full" style="height: 59px;">
+    <p class="text-xl font-semibold text-gray-900" style="width: 50%;">@ViewData["Title"]</p>
+</div>
+
 
 <div class="grid grid-cols-4 gap-4">
 
-    <div
-        class="inline-flex flex-col space-y-4 items-start justify-start col-span-1 p-4 bg-white border border-gray-300">
-        <p class="w-full text-lg font-semibold text-gray-900">Dictionary<TKey,TValue> Класс</p>
-        <p class="w-full text-sm text-gray-900">В следующем примере кода создается пустая Dictionary<TKey,TValue> строка
-                со строковыми ключами и используется Add метод для добавления некоторых элементов.</p>
-        <div class="inline-flex space-x-1 items-center justify-start w-full">
-            <div class="flex space-x-1 items-center justify-start h-full">
-                <p class="text-xs text-gray-400">Дата:</p>
-                <p class="text-xs text-gray-400">15.08.2021</p>
-            </div>
-            <div class="flex space-x-1 items-center justify-center flex-1 h-full">
-                <p class="text-xs text-right text-gray-400">Время:</p>
-                <p class="text-xs text-gray-400">15:00</p>
-            </div>
-        </div>
-    </div>
-
-    <div
-        class="inline-flex flex-col space-y-4 items-start justify-start col-span-1 p-4 bg-white border border-gray-300">
-        <p class="w-full text-lg font-semibold text-gray-900">Dictionary<TKey,TValue> Класс</p>
-        <p class="w-full text-sm text-gray-900">В следующем примере кода создается пустая Dictionary<TKey,TValue> строка
-                со строковыми ключами и используется Add метод для добавления некоторых элементов.</p>
-        <div class="inline-flex space-x-1 items-center justify-start w-full">
-            <div class="flex space-x-1 items-center justify-start h-full">
-                <p class="text-xs text-gray-400">Дата:</p>
-                <p class="text-xs text-gray-400">15.08.2021</p>
-            </div>
-            <div class="flex space-x-1 items-center justify-center flex-1 h-full">
-                <p class="text-xs text-right text-gray-400">Время:</p>
-                <p class="text-xs text-gray-400">15:00</p>
+    @foreach (var item in Model)
+    {
+        text = item.Text.Substring(0, 230);
+        <div
+            class="inline-flex flex-col space-y-4 items-start justify-start col-span-1 p-4 bg-white border border-gray-300">
+            <a asp-action="Details" asp-route-id="@item.Id">
+                <p class="w-full text-lg font-semibold text-gray-900">@Html.DisplayFor(modelItem => item.Name)</p>
+            </a>
+            <p class="w-full text-sm text-gray-900 h-full" id="blog-text">@Html.DisplayFor(modelItem => text)</p>
+            <div class="inline-flex space-x-1 items-center justify-start w-full">
+                <div class="flex space-x-1 items-center justify-start h-full">
+                    <p class="text-xs text-gray-400">Дата:</p>
+                    <p class="text-xs text-gray-400">15.08.2021</p>
+                </div>
+                <div class="flex space-x-1 items-center justify-end text-right w-full flex-1 h-full">
+                    <p class="text-xs text-right text-gray-400">ID: #</p>
+                    <p class="text-xs text-right text-gray-400">@Html.DisplayFor(modelItem => item.Id)</p>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div
-        class="inline-flex flex-col space-y-4 items-start justify-start col-span-1 p-4 bg-white border border-gray-300">
-        <p class="w-full text-lg font-semibold text-gray-900">Dictionary<TKey,TValue> Класс</p>
-        <p class="w-full text-sm text-gray-900">В следующем примере кода создается пустая Dictionary<TKey,TValue> строка
-                со строковыми ключами и используется Add метод для добавления некоторых элементов.</p>
-        <div class="inline-flex space-x-1 items-center justify-start w-full">
-            <div class="flex space-x-1 items-center justify-start h-full">
-                <p class="text-xs text-gray-400">Дата:</p>
-                <p class="text-xs text-gray-400">15.08.2021</p>
-            </div>
-            <div class="flex space-x-1 items-center justify-center flex-1 h-full">
-                <p class="text-xs text-right text-gray-400">Время:</p>
-                <p class="text-xs text-gray-400">15:00</p>
-            </div>
-        </div>
-    </div>
-
-    <div
-        class="inline-flex flex-col space-y-4 items-start justify-start col-span-1 p-4 bg-white border border-gray-300">
-        <p class="w-full text-lg font-semibold text-gray-900">Dictionary<TKey,TValue> Класс</p>
-        <p class="w-full text-sm text-gray-900">В следующем примере кода создается пустая Dictionary<TKey,TValue> строка
-                со строковыми ключами и используется Add метод для добавления некоторых элементов.</p>
-        <div class="inline-flex space-x-1 items-center justify-start w-full">
-            <div class="flex space-x-1 items-center justify-start h-full">
-                <p class="text-xs text-gray-400">Дата:</p>
-                <p class="text-xs text-gray-400">15.08.2021</p>
-            </div>
-            <div class="flex space-x-1 items-center justify-center flex-1 h-full">
-                <p class="text-xs text-right text-gray-400">Время:</p>
-                <p class="text-xs text-gray-400">15:00</p>
-            </div>
-        </div>
-    </div>
+    }
 
 </div>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,7 @@ namespace tomiris
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllersWithViews();
 
             services.AddDbContext<TomirisContext>(
@@ -45,6 +47,9 @@ namespace tomiris
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DIWOS API", Version = "v1" });
             });
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,8 +72,24 @@ namespace tomiris
 
             app.UseRouting();
 
+            app.UseCors(builder => builder.AllowAnyOrigin());
+
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Cookies.ContainsKey("userName")&&context.Request.Cookies.ContainsKey("userId"))
+                {
+
+                }
+                else{
+                    context.Response.Cookies.Append("userId", applicationData["userId"]);
+                    context.Response.Cookies.Append("userName", applicationData["userName"]);
+                }
+
+                await next();
+            });
 
             app.UseEndpoints(endpoints =>
             {
@@ -78,5 +99,12 @@ namespace tomiris
                 endpoints.MapControllers();
             });
         }
+
+        public static Dictionary<string, string> applicationData = new Dictionary<string, string>(3)
+        {
+            { "userId", "null" },
+            { "userName", "null" }
+            
+        };
     }
 }
