@@ -9,7 +9,8 @@
 
     <p class="text-xl font-semibold justify-start text-gray-900 w-full">@ViewData["Title"]</p>
 
-    <a asp-controller="Account" asp-action="Logout" class="inline-flex space-x-2.5 items-center justify-end" style="width: 220px;">
+    <a asp-controller="BlogPost" asp-action="Create" class="inline-flex space-x-2.5 items-center justify-end"
+        style="width: 220px;">
         <p class="text-sm text-right text-blue-700" style="display:inline">Добавить заметку</p>
         <img src="~/img/icons/add.svg" class="w-4 h-full" style="height: auto; width: 24px;" alt="">
     </a>
@@ -26,8 +27,7 @@
     @foreach (var item in Model)
     {
         text = item.Text.Substring(0, 230);
-        <div
-            class="inline-flex flex-col space-y-4 items-start justify-start col-span-1 p-4 bg-white border border-gray-300">
+        <div class="transition inline-flex flex-col space-y-4 items-start justify-start col-span-1 p-4 bg-white border border-gray-300 hover:shadow-2xl hover:border-white">
             <a asp-action="Details" asp-route-id="@item.Id">
                 <p class="w-full text-lg font-semibold text-gray-900">@Html.DisplayFor(modelItem => item.Name)</p>
             </a>

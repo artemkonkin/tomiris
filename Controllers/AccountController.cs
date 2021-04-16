@@ -41,8 +41,7 @@ namespace tomiris.Controllers
                 if (user != null)
                 {
                     await Authenticate(model.Email);
-                    tomiris.Startup.applicationData["userId"] = user.Id.ToString();
-                    tomiris.Startup.applicationData["userName"] = model.Email;
+                    tomiris.Startup.applicationData["userName"] = User.Identity.Name;
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -112,7 +111,6 @@ namespace tomiris.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            tomiris.Startup.applicationData["userId"] = "null";
             tomiris.Startup.applicationData["userName"] = "null";
             return RedirectToAction("Login", "Account");
         }

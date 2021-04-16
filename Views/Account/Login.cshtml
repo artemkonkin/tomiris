@@ -1,7 +1,7 @@
-@model tomiris.ViewModels.LoginModel
+@model tomiris.ViewModels.LoginModel 
 
 @{
-    ViewData["Title"] = "Вход на сайт";
+    ViewData["Title"] = "Вход на сайт"; 
 }
 
 <div class="inline-flex items-center justify-start bg-white w-full" style="height: 59px;">
@@ -9,11 +9,12 @@
 </div>
 
 
-<div class="flex grid grid-cols-4 gap-4 items-center align-center justify-center" style="display: flex; height: 75vh; width: 100%">
+<div class="flex grid grid-cols-4 gap-4 items-center align-center justify-center"
+    style="display: flex; height: 75vh; width: 100%">
 
     <div class="inline-flex col-span-1 space-y-4 space-x-48 items-center justify-center align-center">
         <img src="~/img/delete_il.svg" alt="" style="width: 500px; height: auto;">
-        <div class="inline-flex space-x-4 items-start justify-start" >
+        <div class="inline-flex space-x-4 items-start justify-start">
 
             <form asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
                 <p class="text-2xl font-bold text-center text-gray-900">Вход на сайт</p>
@@ -22,12 +23,12 @@
                     <div class="form-group mt-4">
                         <label asp-for="Email">Введите Email</label>
                         <input type="text" asp-for="Email" />
-                        <span asp-validation-for="Email" />
+                        <span asp-validation-for="Email"></span>
                     </div>
                     <div class="form-group mt-4">
                         <label asp-for="Password">Введите пароль</label>
                         <input asp-for="Password" />
-                        <span asp-validation-for="Password" />
+                        <span asp-validation-for="Password"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Войти" class="button mt-4" />

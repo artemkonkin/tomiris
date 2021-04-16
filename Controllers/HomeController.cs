@@ -24,7 +24,6 @@ namespace tomiris.Controllers
 
         public async Task<IActionResult> IndexAsync()
         {
-            @ViewData["userId"] = "username@mail.com";
             return View(await _context.BlogPosts.ToListAsync());
         }
 

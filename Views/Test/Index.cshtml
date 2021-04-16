@@ -1,9 +1,30 @@
 @{
-    ViewData["Title"] = "Test";
+  ViewData["Title"] = "Test";
 }
 
-<div class="inline-flex justify-start items-center bg-white w-full space-x-4" style="height: 59px; width: 100%;">
+<div class="max-w-none h-screen rounded-lg">
 
-    <p class="text-xl font-semibold justify-start text-gray-900 w-full">@ViewData["Title"]</p>
+  <main class="p-4 bg-white rounded-lg space-y-4">
 
+    <div class="inline-flex justify-start items-center bg-white w-full space-x-4" style="height: 59px; width: 100%;">
+      <p class="text-xl font-semibold justify-start text-gray-900 w-full">@ViewData["Title"]</p>
+    </div>
+
+    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div class="transition p-4 border border-gray-300 m-2 hover:shadow-2xl rounded-lg hover:border-white">
+        <h2 class="text-xl font-bold">Дискеты Parrot</h2>
+        <p class="text-base font-sans pt-4">Черновики становятся личным пространством для работы. В черновиках у нас
+          по-прежнему будет неограниченное количество файлов, страниц и зрителей.</p>
+        <div class="inline-flex w-full justify-between pt-4">
+          <p>Date: 15.08.2021</p>
+          <div class="flex space-x-4">
+            <button class="transition hover:text-blue-700">Edit</button>
+            <button class="transition hover:text-red-700">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
 </div>

@@ -7,7 +7,7 @@
 <div class="inline-flex items-center justify-start bg-white w-full" style="height: 59px;">
     <p class="text-xl font-semibold text-gray-900" style="width: 50%;">@Html.DisplayFor(model => model.Name)</p>
     <a asp-action="Index" class="inline-flex space-x-2.5 items-center justify-end" style="width: 50%;">
-        <p class="text-sm text-right text-gray-700">Отмена</p>
+        <p class="text-sm text-right text-gray-700">Закрыть</p>
         <img src="~/img/icons/close.svg" class="w-4 h-full" style="height: auto; width: 24px;" alt="">
     </a>
 </div>
@@ -16,7 +16,13 @@
     @Html.DisplayFor(model => model.Text)
 </p>
 
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="inline-flex space-x-4 items-start justify-start h-full pt-4 space-x-8">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="inline-flex">
+        Редактировать
+        <img src="~/img/icons/edit.svg" class="w-4 h-full pl-2" style="height: auto; width: 100%;" alt="" />
+    </a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="inline-flex">
+        Удалить
+        <img src="~/img/icons/delete.svg" class="w-4 h-full pl-2" style="height: auto; width: 100%;" alt="">
+    </a>
 </div>

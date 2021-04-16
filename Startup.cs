@@ -79,12 +79,11 @@ namespace tomiris
 
             app.Use(async (context, next) =>
             {
-                if (context.Request.Cookies.ContainsKey("userName")&&context.Request.Cookies.ContainsKey("userId"))
+                if (context.Request.Cookies.ContainsKey("userName"))
                 {
 
                 }
                 else{
-                    context.Response.Cookies.Append("userId", applicationData["userId"]);
                     context.Response.Cookies.Append("userName", applicationData["userName"]);
                 }
 
@@ -102,9 +101,7 @@ namespace tomiris
 
         public static Dictionary<string, string> applicationData = new Dictionary<string, string>(3)
         {
-            { "userId", "null" },
             { "userName", "null" }
-            
         };
     }
 }

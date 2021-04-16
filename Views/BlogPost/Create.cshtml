@@ -4,32 +4,33 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div class="inline-flex items-center justify-start bg-white w-full" style="height: 59px;">
+    <p class="text-xl font-semibold text-gray-900" style="width: 50%;">Создать заметку</p>
+    <a asp-action="Index" class="inline-flex space-x-2.5 items-center justify-end" style="width: 50%;">
+        <p class="text-sm text-right text-gray-700">Отмена</p>
+        <img src="~/img/icons/close.svg" class="w-4 h-full" style="height: auto; width: 24px;" alt="">
+    </a>
+</div>
 
-<h4>BlogPostModel</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">Название</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Text" class="control-label"></label>
-                <input asp-for="Text" class="form-control" />
+                <label asp-for="Text" class="control-label">Текст</label>
+                <textarea asp-for="Text" cols="30" rows="10"></textarea>
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="inline-flex space-x-2.5 items-center justify-end pr-4 ml-0 m-4 bg-white border border-blue-700">
+                <input type="submit" value="Сохранить" style="outline: none; border: none; margin: 0;"
+                    class="bg-white text-blue-700 p-4" />
+                <img src="~/img/icons/save.svg" class="w-4 h-full" style="height: auto; width: 24px;" alt="">
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
