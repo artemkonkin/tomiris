@@ -14,9 +14,9 @@ namespace tomiris.Controllers
 {
     public class BlogPostController : Controller
     {
-        private readonly TomirisContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public BlogPostController(TomirisContext context)
+        public BlogPostController(ApplicationDbContext context)
         {
             _context = context;
         }

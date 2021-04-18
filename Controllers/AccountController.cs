@@ -15,8 +15,8 @@ namespace tomiris.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly TomirisContext db;
-        public AccountController(TomirisContext context)
+        private readonly ApplicationDbContext db;
+        public AccountController(ApplicationDbContext context)
         {
             db = context;
         }

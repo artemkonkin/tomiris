@@ -2,16 +2,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace tomiris.Models
 {
-    public class TomirisContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<BlogPostModel> BlogPosts { get; set; }
 
-        public TomirisContext(DbContextOptions<TomirisContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
             //Database.EnsureDeleted(); //clear before create
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
     }
 }
+
+// dotnet ef migrations add InitialCreate
+// dotnet ef database update
+// dotnet ef migrations list
+// dotnet ef migrations remove
+// 

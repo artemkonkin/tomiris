@@ -15,9 +15,9 @@ namespace tomiris.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly TomirisContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(TomirisContext context)
+        public HomeController(ApplicationDbContext context)
         {
             _context = context;
         }
