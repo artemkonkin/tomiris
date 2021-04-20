@@ -27,7 +27,7 @@ namespace tomiris.Controllers
             return View();
         }
 
-        //TODO Сделать проверку хеша введнного пароля пользователя
+        // Сделать проверку хеша введнного пароля пользователя
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -56,7 +56,7 @@ namespace tomiris.Controllers
             return View();
         }
 
-        //TODO Сделать сохранение хеша введнного пароля пользователя
+        // Сделать сохранение хеша введнного пароля пользователя
 
         [HttpPost]
         [ValidateAntiForgeryToken]

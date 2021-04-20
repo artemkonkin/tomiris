@@ -4,33 +4,29 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>BlogPostModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Text)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Text)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.Id)
-        </dd>
-    </dl>
+<div class="inline-flex items-center justify-start bg-white w-full" style="height: 59px;">
+    <p class="text-xl font-semibold text-gray-900" style="width: 50%;">@Html.DisplayFor(model => model.Name)</p>
+    <a asp-action="Index" class="inline-flex space-x-2.5 items-center justify-end" style="width: 50%;">
+        <p class="text-sm text-right text-gray-700">Закрыть</p>
+        <img src="~/img/icons/close.svg" class="w-4 h-full" style="height: auto; width: 24px;" alt="">
+    </a>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<p class="text-gray-500">
+    Автор: @Html.DisplayFor(model => model.User.Email)
+</p>
+
+<p class="pt-4">
+    @Html.DisplayFor(model => model.Text)
+</p>
+
+<div class="inline-flex space-x-4 items-start justify-start h-full pt-4 space-x-8">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="inline-flex">
+        Редактировать
+        <img src="~/img/icons/edit.svg" class="w-4 h-full pl-2" style="height: auto; width: 100%;" alt="" />
+    </a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="inline-flex">
+        Удалить
+        <img src="~/img/icons/delete.svg" class="w-4 h-full pl-2" style="height: auto; width: 100%;" alt="">
+    </a>
 </div>
