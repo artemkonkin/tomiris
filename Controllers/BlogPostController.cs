@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using tomiris.Models;
 
-// dotnet aspnet-codegenerator controller -name BlogPostController -m BlogPostModel -dc TomirisContext --relativeFolderPath Controllers --useDefaultLayout
-
 namespace tomiris.Controllers
 {
     public class BlogPostController : Controller
