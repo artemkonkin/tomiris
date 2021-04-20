@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,15 +18,13 @@ namespace tomiris.Controllers
             _context = context;
         }
 
-        [Authorize]
         // GET: BlogPost
         public async Task<IActionResult> Index()
         {
-
-            return View(await _context.BlogPosts.Include(u => u.User).ToListAsync());
+            var applicationDbContext = _context.BlogPosts.Include(b => b.User);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        [Authorize]
         // GET: BlogPost/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -37,6 +34,7 @@ namespace tomiris.Controllers
             }
 
             var blogPostModel = await _context.BlogPosts
+                .Include(b => b.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (blogPostModel == null)
             {
@@ -46,20 +44,19 @@ namespace tomiris.Controllers
             return View(blogPostModel);
         }
 
-        [Authorize]
         // GET: BlogPost/Create
         public IActionResult Create()
         {
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        [Authorize]
         // POST: BlogPost/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Text,User")] BlogPostModel blogPostModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Text,UserId")] BlogPostModel blogPostModel)
         {
             if (ModelState.IsValid)
             {
@@ -67,10 +64,10 @@ namespace tomiris.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", blogPostModel.UserId);
             return View(blogPostModel);
         }
 
-        [Authorize]
         // GET: BlogPost/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -84,16 +81,16 @@ namespace tomiris.Controllers
             {
                 return NotFound();
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", blogPostModel.UserId);
             return View(blogPostModel);
         }
 
-        [Authorize]
         // POST: BlogPost/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Text")] BlogPostModel blogPostModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Text,UserId")] BlogPostModel blogPostModel)
         {
             if (id != blogPostModel.Id)
             {
@@ -120,10 +117,10 @@ namespace tomiris.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", blogPostModel.UserId);
             return View(blogPostModel);
         }
 
-        [Authorize]
         // GET: BlogPost/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -133,6 +130,7 @@ namespace tomiris.Controllers
             }
 
             var blogPostModel = await _context.BlogPosts
+                .Include(b => b.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (blogPostModel == null)
             {
@@ -142,7 +140,6 @@ namespace tomiris.Controllers
             return View(blogPostModel);
         }
 
-        [Authorize]
         // POST: BlogPost/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -154,7 +151,6 @@ namespace tomiris.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize]
         private bool BlogPostModelExists(int id)
         {
             return _context.BlogPosts.Any(e => e.Id == id);

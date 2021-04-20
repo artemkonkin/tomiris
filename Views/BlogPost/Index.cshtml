@@ -1,57 +1,47 @@
 @model IEnumerable<tomiris.Models.BlogPostModel>
 
 @{
-    ViewData["Title"] = "Личный кабинет";
-    string text = "";
+    ViewData["Title"] = "Index";
 }
 
-<div class="inline-flex justify-start items-center bg-white w-full space-x-4" style="height: 59px; width: 100%;">
+<h1>Index</h1>
 
-    <p class="text-xl font-semibold justify-start text-gray-900 w-full">@ViewData["Title"]</p>
-
-    <a asp-controller="BlogPost" asp-action="Create" class="inline-flex space-x-2.5 items-center justify-end"
-        style="width: 220px;">
-        <p class="text-sm text-right text-blue-700" style="display:inline">Добавить заметку</p>
-        <img src="~/img/icons/add.svg" class="w-4 h-full" style="height: auto; width: 24px;" alt="">
-    </a>
-
-</div>
-
-<div class="inline-flex space-x-4">
-    <a class="button" asp-area="" asp-controller="Account" asp-action="Logout">Выйти из учётной записи</a>
-    <a class="button" asp-area="" asp-controller="Hash" asp-action="Index">Вычислить ХЭШ строки</a>
-    <a class="button" asp-area="" asp-controller="Test" asp-action="Index">Тестовые функции сайта</a>
-</div>
-
-<div class="grid grid-cols-4 gap-4">
-    @foreach (var item in Model)
-    {
-        text = item.Text.Substring(0, 230);
-        <div class="transition inline-flex flex-col space-y-4 items-start justify-start col-span-1 p-4 bg-white border border-gray-300 hover:shadow-2xl hover:border-white">
-            <a asp-action="Details" asp-route-id="@item.Id">
-                <p class="w-full text-lg font-semibold text-gray-900">@Html.DisplayFor(modelItem => item.Name)</p>
-            </a>
-            <p class="w-full text-sm text-gray-900 h-full" id="blog-text">
-                @Html.DisplayFor(modelItem => text)
-            </p>
-            <div class="inline-flex space-x-1 items-center justify-start w-full">
-                <div class="flex space-x-1 items-center justify-start h-full">
-                    <p class="text-xs text-gray-400">Дата:</p>
-                    <p class="text-xs text-gray-400">15.08.2021</p>
-                </div>
-                <div class="flex space-x-1 items-center justify-center text-right flex-1 h-full w-full">
-                    <p class="text-xs text-right text-gray-400">ID: #</p>
-                    <p class="text-xs text-gray-400">@Html.DisplayFor(modelItem => item.Id)</p>
-                </div>
-                <div class="flex space-x-4 items-start justify-start h-full">
-                    <a asp-action="Edit" asp-route-id="@item.Id">
-                        <img src="~/img/icons/edit.svg" class="w-4 h-full" style="height: auto; width: 100%;" alt="" />
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">
-                        <img src="~/img/icons/delete.svg" class="w-4 h-full" style="height: auto; width: 100%;" alt="">
-                    </a>
-                </div>
-            </div>
-        </div>
-    }
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
