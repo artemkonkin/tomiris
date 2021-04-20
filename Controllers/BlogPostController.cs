@@ -25,8 +25,8 @@ namespace tomiris.Controllers
         // GET: BlogPost
         public async Task<IActionResult> Index()
         {
-            @ViewData["userId"] = "username@mail.com";
-            return View(await _context.BlogPosts.ToListAsync());
+
+            return View(await _context.BlogPosts.Include(u => u.User).ToListAsync());
         }
 
         [Authorize]
@@ -61,7 +61,7 @@ namespace tomiris.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Text")] BlogPostModel blogPostModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Text,User")] BlogPostModel blogPostModel)
         {
             if (ModelState.IsValid)
             {

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +23,17 @@ namespace tomiris.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        [Authorize]
+        public async Task<IActionResult> Index()
         {
-            return View(await _context.BlogPosts.ToListAsync());
+            if (User.Identity != null)
+            {
+                return View(await _context.BlogPosts.Include(u => u.User).ToListAsync());
+            }
+            else
+            {
+                return Redirect("/Account/Login");
+            }
         }
 
         public async Task<IActionResult> Details(int? id)
