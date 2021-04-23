@@ -1,8 +1,8 @@
-﻿@model IEnumerable<tomiris.Models.BlogPostModel>
+﻿@using System.Text
+@model IEnumerable<tomiris.Models.BlogPostModel>
 
 @{
     ViewData["Title"] = "Мои заметки";
-    string text = "";
 }
 
 <div class="inline-flex items-center justify-start bg-white w-full" style="height: 59px;">
@@ -14,7 +14,19 @@
 
     @foreach (var item in Model)
     {
-        text = item.Text.Substring(0, 230);
+
+        // TODO Вот тут мне не нравится эта конструкция 
+        
+        string text; 
+        if(item.Text.Length < 200)
+        {
+            text = item.Text;
+        }
+        else
+        {
+            text = item.Text.Substring(0,200);
+        }
+
         <div class="transition inline-flex flex-col space-y-4 items-start justify-start col-span-1 p-4 bg-white border border-gray-300 hover:shadow-2xl hover:border-white">
             <a asp-action="Details" asp-route-id="@item.Id">
                 <p class="w-full text-lg font-semibold text-gray-900">@Html.DisplayFor(modelItem => item.Name)</p>
@@ -23,13 +35,9 @@
                 @Html.DisplayFor(modelItem => text)
             </p>
             <div class="inline-flex space-x-1 items-center justify-start w-full">
-                <div class="flex space-x-1 items-center justify-start h-full">
-                    <p class="text-xs text-gray-400">Дата:</p>
-                    <p class="text-xs text-gray-400">15.08.2021</p>
-                </div>
-                <div class="flex space-x-1 items-center justify-end text-right flex-1 h-full w-full">
-                    <p class="text-xs text-right text-gray-400">ID: #</p>
-                    <p class="text-xs text-gray-400">@Html.DisplayFor(modelItem => item.Id)</p>
+                <div class="flex space-x-1 items-center justify-start h-full w-full">
+                    <p class="text-xs text-right text-gray-400">Автор: </p>
+                    <p class="text-xs text-gray-400">@Html.DisplayFor(modelItem => item.User.Email)</p>
                 </div>
             </div>
         </div>

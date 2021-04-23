@@ -12,7 +12,11 @@
     </a>
 </div>
 
-<p>
+<p class="text-gray-500">
+    Автор: @Html.DisplayFor(model => model.User.Email)
+</p>
+
+<p class="pt-4">
     @Html.DisplayFor(model => model.Text)
 </p>
 

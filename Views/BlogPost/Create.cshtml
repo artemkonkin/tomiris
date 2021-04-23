@@ -1,37 +1,33 @@
 @model tomiris.Models.BlogPostModel
 
 @{
-    ViewData["Title"] = "Создать заметку";
+    ViewData["Title"] = "Create";
 }
 
-<div class="inline-flex items-center justify-start bg-white w-full" style="height: 59px;">
-    <p class="text-xl font-semibold text-gray-900" style="width: 50%;">Создать заметку</p>
+<div class="inline-flex justify-start items-center bg-white w-full space-x-4" style="height: 59px; width: 100%;">
+
+    <p class="text-xl font-semibold justify-start text-gray-900 w-full">@ViewData["Title"]</p>
+
     <a asp-action="Index" class="inline-flex space-x-2.5 items-center justify-end" style="width: 50%;">
         <p class="text-sm text-right text-gray-700">Отмена</p>
         <img src="~/img/icons/close.svg" class="w-4 h-full" style="height: auto; width: 24px;" alt="">
     </a>
+
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label">Название</label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Text" class="control-label">Текст</label>
-                <textarea asp-for="Text" cols="30" rows="10"></textarea>
-                <span asp-validation-for="Text" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="User" value="@User.Identity"/>
-            <div class="inline-flex space-x-2.5 items-center justify-end pr-4 ml-0 m-4 bg-white border border-blue-700">
-                <input type="submit" value="Сохранить" style="outline: none; border: none; margin: 0;"
-                    class="bg-white text-blue-700 p-4" />
-                <img src="~/img/icons/save.svg" class="w-4 h-full" style="height: auto; width: 24px;" alt="">
-            </div>
-        </form>
+<form asp-action="Create">
+    <label asp-for="Name">Название</label>
+    <input asp-for="Name" />
+
+    <label asp-for="Text">Текст</label>
+    <textarea asp-for="Text" cols="30" rows="10"></textarea>
+
+    <label hidden asp-for="UserId" class="control-label"></label>
+    <select hidden asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+
+    <div class="inline-flex space-x-2.5 items-center justify-end pr-4 ml-0 m-4 bg-white border border-blue-700">
+        <input type="submit" value="Сохранить" style="outline: none; border: none; margin: 0;"
+            class="bg-white text-blue-700 p-4" />
+        <img src="~/img/icons/save.svg" class="w-4 h-full" style="height: auto; width: 24px;" alt="">
     </div>
-</div>
+</form>
