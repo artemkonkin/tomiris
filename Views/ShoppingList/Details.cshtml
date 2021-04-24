@@ -6,6 +6,18 @@
 
 <h1>Details</h1>
 
+<div class="inline-flex justify-start items-center bg-white w-full space-x-4" style="height: 59px; width: 100%;">
+
+    <p class="text-xl font-semibold justify-start text-gray-900 w-full">@ViewData["Title"]</p>
+
+    <a asp-controller="ShoppingListItem" asp-action="Create" class="inline-flex space-x-2.5 items-center justify-end"
+        style="width: 220px;">
+        <p class="text-sm text-right text-blue-700" style="display:inline">Добавить элемент в список</p>
+        <img src="~/img/icons/add.svg" class="w-4 h-full" style="height: auto; width: 24px;" alt="">
+    </a>
+
+</div>
+
 <div>
     <h4>ShoppingListModel</h4>
     <hr />
