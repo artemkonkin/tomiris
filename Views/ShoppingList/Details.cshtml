@@ -1,0 +1,42 @@
+@model tomiris.Models.ShoppingListModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div class="inline-flex justify-start items-center bg-white w-full space-x-4" style="height: 59px; width: 100%;">
+
+    <p class="text-xl font-semibold justify-start text-gray-900 w-full">@ViewData["Title"]</p>
+
+    <a asp-controller="ShoppingListItem" asp-action="Create" class="inline-flex space-x-2.5 items-center justify-end"
+        style="width: 220px;">
+        <p class="text-sm text-right text-blue-700" style="display:inline">Добавить элемент в список</p>
+        <img src="~/img/icons/add.svg" class="w-4 h-full" style="height: auto; width: 24px;" alt="">
+    </a>
+
+</div>
+
+<div>
+    <h4>ShoppingListModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.User.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
