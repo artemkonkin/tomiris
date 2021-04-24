@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using tomiris.Models;
 
 namespace tomiris.Models
 {
@@ -14,6 +15,8 @@ namespace tomiris.Models
             //Database.EnsureDeleted(); //clear before create
             Database.EnsureCreated();
         }
+
+        public DbSet<tomiris.Models.ShoppingListItemModel> ShoppingListItemModel { get; set; }
     }
 }
 

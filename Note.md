@@ -12,7 +12,7 @@ dotnet ef migrations remove
 ```
 dotnet aspnet-codegenerator controller -name BlogPostController -m BlogPostModel -dc ApplicationDbContext --relativeFolderPath Controllers --useDefaultLayout
 dotnet aspnet-codegenerator controller -name ShoppingListController -m ShoppingListModel -dc ApplicationDbContext --relativeFolderPath Controllers --useDefaultLayout
-dotnet aspnet-codegenerator controller -name BlogPostController -m BlogPostModel -dc ApplicationDbContext --relativeFolderPath Controllers --useDefaultLayout
+dotnet aspnet-codegenerator controller -name ShoppingListItemController -m ShoppingListItemModel -dc ApplicationDbContext --relativeFolderPath Controllers --useDefaultLayout
 ```
 
 # Заметки
