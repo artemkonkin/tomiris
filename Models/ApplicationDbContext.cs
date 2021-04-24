@@ -11,7 +11,7 @@ namespace tomiris.Models
             : base(options)
         {
             //Database.EnsureDeleted(); //clear before create
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
     }
 }

@@ -32,8 +32,8 @@ namespace tomiris
             services.AddControllersWithViews();
 
             services.AddDbContext<ApplicationDbContext>(
-                dbContextOptions => dbContextOptions.UseMySql("server=localhost;user=root;password=000;database=tomiris",
-                new MySqlServerVersion(new Version(8, 0, 22))
+                dbContextOptions => dbContextOptions.UseMySql("server=109.234.37.141;port=3306;user=app;password=netuser000;database=tomiris",
+                new MySqlServerVersion(new Version(8, 0, 23))
             ));
 
             // установка конфигурации подключения
