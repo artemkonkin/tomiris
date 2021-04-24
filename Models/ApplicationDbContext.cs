@@ -6,6 +6,7 @@ namespace tomiris.Models
     {
         public DbSet<User> Users { get; set; }
         public DbSet<BlogPostModel> BlogPosts { get; set; }
+        public DbSet<ShoppingListModel> ShoppingLists { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
